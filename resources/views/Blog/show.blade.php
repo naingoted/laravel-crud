@@ -6,6 +6,7 @@
 			<p>{!! $blog->body !!}</p>
 		</div>
 	</div>
+	<?php //dd($blog->comments());?>
 	<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				@foreach($blog->comments as $comment)

@@ -23,7 +23,7 @@
 				<tr>
 					<td>{{ $blog->title }}</td>
 					<td>{!!str_limit($blog->body, $limit = 50, $end = '...') !!}</td>
-					<td></td>
+					<td>{{ $blog->comments->count() }}</td>
 					<td>{{ $blog->created_at }}</td>
 					<td>
 					<a href="{{ route('blogs.show', $blog->id) }}" class="btn btn-primary">Show</a>
