@@ -1,4 +1,4 @@
-@extends("layouts.master")
+@extends("layouts.app")
 @section("content")
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -6,20 +6,38 @@
 			<p>{!! $blog->body !!}</p>
 		</div>
 	</div>
-	<?php //dd($blog->comments());?>
 	<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-8 col-md-offset-2 comment">
+				{{-- hide Comment Title If there's none --}}
+				@if($blog->comments->count() > 0)
+					<h2> Comments </h2>
+				@endif
 				@foreach($blog->comments as $comment)
-					<div class="comment">
-						<p><strong>Name:</strong> {{ $comment->name }}</p>
-						<p><strong>Comment:</strong><br/>{{ $comment->comment }}</p><br>
+					<div class="panel panel-default">
+						<div class="comment-top panel-heading">
+							<strong class="comment-name">
+								{{ $comment->name }}
+							</strong>
+							{{-- Making Date Format More Readable --}}
+							<span class="comment-date"> 
+							commented {{ $comment->created_at->diffForHumans()}}
+							</span>		
+
+						</div>
+						<div class="comment-bottom panel-body">
+							{{ $comment->comment }}
+						</div>
 					</div>
 				@endforeach
 			</div>
 		</div>
 
 		<div class="row">
-			<div id="comment-form" class="col-md-8 col-md-offset-2" style="margin-top: 50px;">
+		    <div class="col-md-8 col-md-offset-2">
+				<h2> Post Comments </h2>
+			</div>
+			<div id="comment-form" class="col-md-8 col-md-offset-2">
+			{{-- Used Laravel Collective Package --}}
 				{{ Form::open(['route' => ['comments.store', $blog->id], 'method' => 'POST']) }}
 					
 					<div class="row">

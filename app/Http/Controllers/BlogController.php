@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Http\Request;
 use App\Blog;
-
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -19,7 +19,20 @@ class BlogController extends Controller
         $blogs = Blog::latest()->get();
         return view("blog.index", compact("blogs"));
     }
-
+    /**
+     * Out put data in Datatables format
+     */
+    public function data()
+    {   
+        return Datatables::of(Blog::query())->make(true);
+    }
+    /**
+     * Show data in datatable
+     */
+    public function datatable()
+    {
+        return view("blog.datatable");
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -38,12 +51,12 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // frontend validation
         $this->validate($request, [
             'title' => 'bail|required|unique:blogs',
             'body'  => 'required'
             ]);
-        
+        // mass assignment , insert current logged in user's id
         Blog::create(['title' => $request->input('title'),
                         'body'  => $request->input('body'),
                         'user_id'   => Auth::id()
@@ -61,8 +74,6 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
-
         $blog = Blog::findOrFail($id);
         return view('blog.show', compact("blog"));
     }

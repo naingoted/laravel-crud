@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'SPH'),
 
     /*
     |--------------------------------------------------------------------------
@@ -179,6 +179,9 @@ return [
 
         // For Forms and HTML in blade template
         Collective\Html\HtmlServiceProvider::class,
+
+        // For JQuery Datables
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -230,6 +233,8 @@ return [
         // For Blade 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        // Datatables
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 

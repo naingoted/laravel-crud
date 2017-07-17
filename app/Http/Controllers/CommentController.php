@@ -6,6 +6,7 @@ use App\Comment;
 use App\Blog;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -47,6 +48,7 @@ class CommentController extends Controller
         $comment->name = $request->name;
         $comment->email = $request->email;
         $comment->comment = $request->comment;
+        $comment->user_id = Auth::id();
         $comment->blog()->associate($blog);
         $comment->save();
 

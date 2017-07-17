@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class Comment extends Model
 {
     /**
@@ -23,4 +23,6 @@ class Comment extends Model
     {
     	return $this->belongsTo('App\Blog');
     }
+
 }
+

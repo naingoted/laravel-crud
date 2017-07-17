@@ -1,7 +1,7 @@
-@extends("layouts.master")
+@extends("layouts.app")
 @section("content")
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-8 col-md-offset-2">
 		<form action="{{ route('blogs.update', $blog->id) }}" method="POST">
 			{{ csrf_field() }}
 			<div class="form-group">
